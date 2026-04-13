@@ -1,37 +1,37 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
-@theme {
-  --font-orbitron: "Orbitron", sans-serif;
-  --font-rajdhani: "Rajdhani", sans-serif;
-  
-  --color-primary: var(--bg-primary);
-  --color-secondary: var(--fg-primary);
-  --color-accent: var(--accent);
-}
-
 :root {
   --bg-primary: #f4e022;
   --fg-primary: #111111;
   --accent: #00f0ff;
+
+  --font-orbitron: "Orbitron", sans-serif;
+  --font-rajdhani: "Rajdhani", sans-serif;
 }
 
 .theme-dark {
   --bg-primary: #111111;
   --fg-primary: #f4e022;
-  --accent: #00f0ff;
 }
 
 .theme-white {
   --bg-primary: #ffffff;
   --fg-primary: #111111;
-  --accent: #00f0ff;
+}
+
+@theme {
+  --font-orbitron: var(--font-orbitron);
+  --font-rajdhani: var(--font-rajdhani);
+  --color-primary: var(--bg-primary);
+  --color-secondary: var(--fg-primary);
+  --color-accent: var(--accent);
 }
 
 body {
   background-color: var(--bg-primary);
   color: var(--fg-primary);
-  font-family: "Rajdhani", sans-serif;
+  font-family: var(--font-rajdhani);
   margin: 0;
   -webkit-touch-callout: none;
   -webkit-user-select: none;

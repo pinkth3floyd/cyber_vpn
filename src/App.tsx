@@ -4,15 +4,16 @@
 // import heroImg from './assets/hero.png'
 // import './App.css'
 
+import { useState } from "react"
 import { Login } from "./core/pages/Login"
 
 function App() {
-  // const [count, setCount] = useState(0)
+  const [currentScreen, setCurrentScreen] = useState('login');
 
   return (
     <>
-      <section id="center">
-        <Login/>
+      <section id="center" className="relative w-full h-full overflow-hidden">
+        {currentScreen === 'login' && <Login setCurrentScreen={setCurrentScreen}/>}
       
       </section>
 
