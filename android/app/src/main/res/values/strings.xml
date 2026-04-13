@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">cyber-vpn</string>
+    <string name="title_activity_main">cyber-vpn</string>
+    <string name="package_name">com.gorey.cybervpn</string>
+    <string name="custom_url_scheme">com.gorey.cybervpn</string>
+</resources>
