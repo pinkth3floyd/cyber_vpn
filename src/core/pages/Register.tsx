@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { motion } from 'motion/react';
 import { User, Lock, Mail, UserPlus, ArrowLeft } from 'lucide-react';
 import { CyberBox } from '../elements/CyberBox';

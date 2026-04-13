@@ -19,7 +19,7 @@ function App() {
 
   useEffect(() => {
     if (currentScreen === 'splash') {
-      const timer = setTimeout(() => setCurrentScreen('login'), 2500);
+      const timer = setTimeout(() => setCurrentScreen('home'), 2500);
       return () => clearTimeout(timer);
     }
   }, [currentScreen]);
