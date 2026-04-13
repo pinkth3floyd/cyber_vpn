@@ -7,6 +7,7 @@
 import { useState } from "react"
 import { Login } from "./core/pages/Login"
 import { Register } from "./core/pages/Register";
+import { Home } from "./core/pages/Home";
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState('login');
@@ -15,7 +16,8 @@ function App() {
     <>
       <section id="center" className="relative w-full h-full overflow-hidden">
         {/* {currentScreen === 'login' && <Login setCurrentScreen={setCurrentScreen}/>} */}
-        <Register/>
+        {/* <Register/> */}
+        {/* <Home/> */}
       
       </section>
 
