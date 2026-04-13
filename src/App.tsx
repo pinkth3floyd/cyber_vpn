@@ -24,6 +24,17 @@ function App() {
   const [theme, setTheme] = useState('yellow');
 
   useEffect(() => {
+    // Hide the native splash screen once the web app is ready
+    if (typeof window !== 'undefined' && (window as any).Capacitor) {
+      const Capacitor = (window as any).Capacitor;
+      if (Capacitor.Plugins?.SplashScreen) {
+        // We can hide it immediately because index.html now has a yellow bg
+        Capacitor.Plugins.SplashScreen.hide().catch(() => {});
+      }
+    }
+  }, []);
+
+  useEffect(() => {
     if (currentScreen === 'splash') {
       const timer = setTimeout(() => setCurrentScreen('home'), 2500);
       return () => clearTimeout(timer);
