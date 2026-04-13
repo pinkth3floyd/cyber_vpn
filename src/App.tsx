@@ -11,6 +11,12 @@ import { Premium } from "./core/pages/Premium";
 import { BackgroundTech } from "./core/elements/BackgroundTech";
 import { AnimatePresence } from "motion/react";
 
+const THEME_COLORS: Record<string, { bg: string; isDark: boolean }> = {
+  yellow: { bg: '#f4e022', isDark: false },
+  dark: { bg: '#111111', isDark: true },
+  white: { bg: '#ffffff', isDark: false },
+};
+
 function App() {
   const [currentScreen, setCurrentScreen] = useState('splash');
   const [isConnected, setIsConnected] = useState(false);
@@ -40,27 +46,25 @@ function App() {
     const isPremium = currentScreen === 'premium';
     const activeTheme = isPremium ? 'dark' : theme;
     
+    // Update CSS classes
     document.body.className = activeTheme === 'dark' ? 'theme-dark' : activeTheme === 'white' ? 'theme-white' : '';
     
-    // Get computed colors from CSS variables
-    const computedStyle = getComputedStyle(document.body);
-    const color = computedStyle.getPropertyValue('--bg-primary').trim() || (activeTheme === 'dark' ? '#111111' : activeTheme === 'white' ? '#ffffff' : '#f4e022');
-    const isDark = activeTheme === 'dark';
+    // Get hex values directly for Native APIs
+    const themeConfig = THEME_COLORS[activeTheme as keyof typeof THEME_COLORS] || THEME_COLORS.yellow;
+    const color = themeConfig.bg;
+    const isDark = themeConfig.isDark;
     
     const metaThemeColor = document.querySelector('meta[name="theme-color"]');
     if (metaThemeColor) {
       metaThemeColor.setAttribute('content', color);
     }
     
-    // Capacitor native bars configuration (for when converted to mobile app)
     if (typeof window !== 'undefined' && (window as any).Capacitor) {
       const Capacitor = (window as any).Capacitor;
       if (Capacitor.Plugins?.StatusBar) {
-        Capacitor.Plugins.StatusBar.setBackgroundColor({ color }).catch(() => {});
+        // Note: setBackgroundColor only works on Android. On iOS, style handles contrast.
+        Capacitor.Plugins.StatusBar.setBackgroundColor({ color: color }).catch(() => {});
         Capacitor.Plugins.StatusBar.setStyle({ style: isDark ? 'DARK' : 'LIGHT' }).catch(() => {});
-      }
-      if (Capacitor.Plugins?.NavigationBar) {
-        Capacitor.Plugins.NavigationBar.setColor({ color, darkButtons: !isDark }).catch(() => {});
       }
     }
   }, [currentScreen, theme]);
